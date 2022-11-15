@@ -1,3 +1,4 @@
+
 import Directory from "./components/directory/directory.component";
 
 const App = () => {
@@ -31,8 +32,14 @@ const App = () => {
   ];
 
   return (
-    <h1 placeholder="Leah Esther"></h1>,
-    <Directory categories={categories}></Directory>
+    <div className="row-cols-1">
+      <div className="col text-center py-5 my-2">
+        <h1>nana style</h1>
+      </div>
+      <div className="col">
+        <Directory categories={categories}></Directory>
+      </div>
+    </div>
   );
   
 }
