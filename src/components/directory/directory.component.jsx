@@ -15,7 +15,7 @@ const Directory = ({categories}) => {
           }
           else{
             return(
-              <div className='col col-md-6 px-2'>
+              <div className='col col-lg-6 px-2'>
                 <CategoryItem key={category.id} category={category}></CategoryItem>
               </div>
             );    
