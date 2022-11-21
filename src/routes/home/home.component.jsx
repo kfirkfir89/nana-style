@@ -1,4 +1,6 @@
 
+import { Outlet } from "react-router-dom";
+
 import Directory from "../../components/directory/directory.component";
 
 const Home = () => {
@@ -32,11 +34,11 @@ const Home = () => {
   ];
 
   return (
-    <div className="row-cols-1">
-      <div className="col text-center py-5 my-2">
+    <div className="grid grid-cols-1 px-0">
+      <div className="text-center text-[#00df9a] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-2xl pb-4">
         <h1>nana style</h1>
       </div>
-      <div className="col">
+      <div className="">
         <Directory categories={categories}></Directory>
       </div>
     </div>

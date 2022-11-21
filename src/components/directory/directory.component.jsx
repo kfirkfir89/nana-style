@@ -4,22 +4,13 @@ import './directory.styles.scss'
 
 const Directory = ({categories}) => {
   return (
-    <div className="categories-container container-xl row-cols-1">
+    <div className="grid grid-cols-1 md:grid-cols-4 content-center">
       {categories.map((category) => {
-        if(category.id === 5){
-          return(
-              <div className='col px-2'>
-                <CategoryItem key={category.id} category={category}></CategoryItem>
-              </div>
-            );
-          }
-          else{
-            return(
-              <div className='col col-lg-6 px-2'>
-                <CategoryItem key={category.id} category={category}></CategoryItem>
-              </div>
-            );    
-          }
+        return(
+
+              <CategoryItem key={category.id} category={category}></CategoryItem>
+
+        );
       })}
     </div>
   );
