@@ -52,7 +52,7 @@ const SignUpForm = () => {
     <div className='sign-up-container fontFamily px-5'>
       <h2>Don't have an account?</h2>
       <span className='pl-1'>Sign up with your email and password</span>
-      <form className="grid grid-col-4" onSubmit={handleSubmit}>
+      <form className="grid grid-col-4 mt-2" onSubmit={handleSubmit}>
         
         <FormInput 
           label="Display Name"
@@ -92,7 +92,7 @@ const SignUpForm = () => {
 
         <div className='grid grid-cols-4'>
           <div className='flex flex-col col-start-2 col-span-2 gap-3'>
-            <Button buttonType={'default'} type="submit">Sign Up</Button>
+            <Button buttonType='default' type="submit">Sign Up</Button>
           </div>
         </div>
 
