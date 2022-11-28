@@ -1,3 +1,13 @@
+.sign-up-container{
+  display: flex;
+  flex-direction: column;
+  width: 380;
+
+  h2{
+    margin-top: 10px 0;
+    font-size: 2rem;
+  }
+}
 
 .fontFamily{
   color: black;
@@ -8,6 +18,7 @@
 }
 
 .signUpButton{
+
   transition: background-color .3s, box-shadow .3s;
   color: white;
   height: 2.55rem;
