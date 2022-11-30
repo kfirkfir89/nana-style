@@ -1,17 +1,20 @@
-//import $ from 'jquery';
-//import Popper from 'popper.js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import './index.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import App from './App';
+import { UserProvier } from './contexts/user.context';
+
+import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvier>
+        <App />
+      </UserProvier>
     </BrowserRouter>
   </React.StrictMode>
 );
