@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils'
-import './sign-in-form.styles.scss'
+import './sign-in-form.styles.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -80,8 +80,8 @@ const SignInForm = () => {
 
         <div className='grid grid-cols-4'>
           <div className='flex flex-col col-start-2 col-span-2 gap-3'>
-            <Button type="submit" buttonType='default'>Sign In</Button>
-            <Button type="button" buttonType='google' onClick={signInWithGoogle}>Google</Button>
+            <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.default}>Sign In</Button>
+            <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>Google</Button>
           </div>
         </div>
 
