@@ -1,23 +1,21 @@
 import { createSelector } from "reselect";
 
-const selectCategoryReducer = (state) => {
-  console.log('selector 1 fired');
-  return state.categories;
-};
+//memoization/cache
+//any change in redux store will rerun all the useSelectors in the app
+//initial selector to get the data/slice that we need
+const selectCategoryReducer = (state) => state.categories;
+
 
 export const selectCategories = createSelector(
-  [selectCategoryReducer],
-  (categoriesSlice) => {
-    console.log('selector 2 fired');
-    return categoriesSlice.categories; 
-  }
-);
-
-
-export const selectCategoriesMap = createSelector(
-  [selectCategories],
-  (categories) => {
-    console.log('selector 3 fired');
+    //input
+    [selectCategoryReducer],
+    //output the output will run only if the input value change
+    (categoriesSlice) => categoriesSlice.categories
+  );
+  
+  export const selectCategoriesMap = createSelector(
+    [selectCategories],
+    (categories) => {
     return categories.reduce((acc, category) => {
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
