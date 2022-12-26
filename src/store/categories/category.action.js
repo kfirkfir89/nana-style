@@ -1,6 +1,6 @@
 import { createAction } from "../../utils/reducer/reducer.utils";
 import { CATEGORIES_ACTION_TYPES } from './category.types';
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
+//import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
 export const featchCategoriesStart = () => 
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
@@ -11,7 +11,9 @@ export const featchCategoriesSuccess = (categoriesArray) =>
 export const featchCategoriesFailed = (error) => 
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
 
-export const featchCategoriesAsync = () => async (dispatch) => {
+
+  //thunk option
+/* export const featchCategoriesAsync = () => async (dispatch) => {
   dispatch(featchCategoriesStart());
 
   try {
@@ -21,4 +23,4 @@ export const featchCategoriesAsync = () => async (dispatch) => {
   catch (error) {
     dispatch(featchCategoriesFailed(error));
   }
-};
+}; */
