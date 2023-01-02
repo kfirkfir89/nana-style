@@ -12,7 +12,7 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(featchCategoriesStart());    
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
