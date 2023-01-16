@@ -44,6 +44,7 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
@@ -65,6 +66,7 @@ export const getCategoriesAndDocuments = async () => {
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 
 }
+
 /* 
 db structure
 {
@@ -143,4 +145,18 @@ export const getCurrentUser = () => {
       reject
     );
   });
+};
+
+export const createNewOrderDocument = async (newOrderDetails, addittionalInformation = {}) => {
+  console.log("STARTTTTTTTT",newOrderDetails)
+  if(!newOrderDetails) return;
+  
+/*   const batch = writeBatch(db);
+  const docRef = doc(db, 'orders', newOrderDetails.orderId.toString());
+  batch.set(docRef, newOrderDetails);     
+  await batch.commit(); */
+
+  await setDoc(doc(db, 'orders', newOrderDetails.orderId.toString()), newOrderDetails);
+  console.log('done');
+
 };

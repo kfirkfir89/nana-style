@@ -6,8 +6,6 @@ import { featchCategoriesSuccess, featchCategoriesFailed } from "./category.acti
 
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
-
-
 export function* featchCategoriesAsync() {
   try {
     const categoriesArray = yield call(getCategoriesAndDocuments, 'categories');

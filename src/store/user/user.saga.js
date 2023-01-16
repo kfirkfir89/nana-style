@@ -77,11 +77,11 @@ export function* signInAfterSignUp({payload: { user, additionalDetails }}){
 };
 
 export function* onGoogleSignInStart() {
-  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_SRART, signInWithGoogle);
+  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
 };
 
 export function* onEmailSignInStart(){
-  yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_SRART, signInWithEmail)
+  yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail)
 };
 
 export function* onCheckUserSession(){
