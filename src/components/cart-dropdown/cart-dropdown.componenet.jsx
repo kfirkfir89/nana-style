@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
+
 import { selectCartItems, selectIsCartOpen } from "../../store/cart/cart.selector";
+
 import { setIsCartOpen } from "../../store/cart/cart.action";
+import { resetOrderState } from "../../store/orders/order.action"; 
 
 import {CartDropdownContainer, EmptyMessage, CartItems} from './cart-dropdown.styles';
 
@@ -16,6 +19,7 @@ const CartDropdown = () => {
 
   const goToCheckOutHandler = () => {
     dispatch(setIsCartOpen(!isCartOpen));
+    dispatch(resetOrderState());
     navigate('/checkout');
   }
 

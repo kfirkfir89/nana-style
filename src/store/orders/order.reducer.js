@@ -19,7 +19,6 @@ export const orderReducer = (state = ORDERS_INITIAL_STATE, action = {}) => {
       return{
         ...state,
         isLoading: false,
-        isOrderSuccesded: true,
         orderDetails: payload,
       };
     }
@@ -32,7 +31,6 @@ export const orderReducer = (state = ORDERS_INITIAL_STATE, action = {}) => {
     case ORDER_ACTION_TYPES.RESET_STATE:{
       return{
         isLoading: false,
-        isOrderSuccesded: false,
         orderDetails: null,
       };
     }

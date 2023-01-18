@@ -12,7 +12,7 @@ export const selectIsLoadingOrder = createSelector(
     (selectOrderReducer) => selectOrderReducer.isLoading
   );
 
-export const selectSuccesededOrderDetails = createSelector(
+export const selectOrderDetails = createSelector(
     //input
     [selectOrderReducer],
     //output the output will run only if the input value change

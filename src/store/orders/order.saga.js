@@ -1,7 +1,7 @@
 import { all, call, takeLatest, put , select } from "redux-saga/effects";
 
 import { ORDER_ACTION_TYPES } from "./order.types";
-import { orderSuccesded, orderFailed } from "./order.action"; 
+import { orderSuccesded, orderFailed, resetOrderState } from "./order.action"; 
 
 import * as cartSelectors from "../cart/cart.selector";
 
@@ -58,17 +58,18 @@ export function* paymentIntentCall({payload:{amount, card, currentUser , stripe}
     
     alert(error);
   }
-  };
+};
 
-
-/* export function* onOrderSuccess() {
-  console.log("SAGAsucecsss");
-  yield takeLatest(ORDER_ACTION_TYPES.FETCH_ORDER_SUCCESS, newOrderSucceeded);
+/* export function* onStartResetOrderState() {
+  try {
+    yield put(resetOrderState());
+  } catch (error) {
+  }
 };
  */
-/* export function* onOrderFailed() {
-  console.log("SAGA");
-  yield takeLatest(ORDER_ACTION_TYPES.FETCH_ORDER_FAILED, paymentIntentCall);
+
+/* export function* onCreatingNewOrder() {
+  yield takeLatest(ORDER_ACTION_TYPES.RESET_STATE, paymentIntentCall);
 }; */
 
 export function* onCreateOrderStart() {

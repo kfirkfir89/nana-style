@@ -1,25 +1,12 @@
-
-import { useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import { selectSuccesededOrderDetails } from "../../store/orders/order.selector";
-
-import { resetOrderState } from "../../store/orders/order.action";
+import { useSelector } from "react-redux";
+import { selectOrderDetails } from "../../store/orders/order.selector";
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 export const PaymentSucceeded = () => {
   
-  const orderDetails = useSelector(selectSuccesededOrderDetails);
+  const orderDetails = useSelector(selectOrderDetails);
   const { createAt, orderId, user, orderItems } = orderDetails;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetOrderState());
-
-    }
-  })
 
   return(
     <div>

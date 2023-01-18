@@ -4,7 +4,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectCartTotal } from "../../store/cart/cart.selector";
-import { selectIsLoadingOrder, selectSuccesededOrderDetails } from "../../store/orders/order.selector";
+import { selectIsLoadingOrder, selectOrderDetails } from "../../store/orders/order.selector";
 
 import { createOrderStart } from "../../store/orders/order.action";
 import { resetCartItemsState } from "../../store/cart/cart.action";
@@ -24,14 +24,14 @@ const PaymentForm = () => {
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
   const orderIsLoading = useSelector(selectIsLoadingOrder);
-  const orderDetails = useSelector(selectSuccesededOrderDetails);
+  const orderDetails = useSelector(selectOrderDetails);
   
   useEffect(() => {
     return () => {
       dispatch(resetCartItemsState());
       navigate('/payment-succeeded');
     };
-  }, [orderDetails != null]);
+  }, [orderDetails !== null]);
   
   const paymentHandler = async (e) => {
     e.preventDefault();
