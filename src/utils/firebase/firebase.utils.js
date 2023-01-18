@@ -67,6 +67,7 @@ export const getCategoriesAndDocuments = async () => {
 
 }
 
+
 /* 
 db structure
 {
@@ -148,15 +149,16 @@ export const getCurrentUser = () => {
 };
 
 export const createNewOrderDocument = async (newOrderDetails, addittionalInformation = {}) => {
-  console.log("STARTTTTTTTT",newOrderDetails)
+
   if(!newOrderDetails) return;
-  
-/*   const batch = writeBatch(db);
-  const docRef = doc(db, 'orders', newOrderDetails.orderId.toString());
-  batch.set(docRef, newOrderDetails);     
-  await batch.commit(); */
 
   await setDoc(doc(db, 'orders', newOrderDetails.orderId.toString()), newOrderDetails);
   console.log('done');
+/* 
+  const docRef = doc(db, 'orders', newOrderDetails.orderId.toString());
+  const docSnap  = await getDoc(docRef);
 
+  const newOrder = docSnap.data();
+  console.log('done',newOrder);
+  */
 };

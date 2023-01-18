@@ -2,7 +2,6 @@ import { ORDER_ACTION_TYPES } from './order.types';
 
 export const ORDERS_INITIAL_STATE = {
   isLoading: false,
-  isOrderSuccesded: false,
   orderDetails: null,
 };
 
@@ -17,12 +16,11 @@ export const orderReducer = (state = ORDERS_INITIAL_STATE, action = {}) => {
       };
     }
     case ORDER_ACTION_TYPES.FETCH_ORDER_SUCCESS:{
-      console.log(payload);
       return{
         ...state,
         isLoading: false,
         isOrderSuccesded: true,
-        orderDetails: payload
+        orderDetails: payload,
       };
     }
     case ORDER_ACTION_TYPES.FETCH_ORDER_FAILED:{
@@ -43,4 +41,3 @@ export const orderReducer = (state = ORDERS_INITIAL_STATE, action = {}) => {
     }
   }
 };
-

@@ -2,10 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectCartTotal } from "../../store/cart/cart.selector";
+import { selectIsLoadingOrder, selectSuccesededOrderDetails } from "../../store/orders/order.selector";
+
 import { createOrderStart } from "../../store/orders/order.action";
-import { selectIsLoadingOrder, selectIsOrderSuccesded } from "../../store/orders/order.selector";
+import { resetCartItemsState } from "../../store/cart/cart.action";
+
 
 import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
@@ -17,25 +20,26 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
   const orderIsLoading = useSelector(selectIsLoadingOrder);
-  const isOrderSuccesded = useSelector(selectIsOrderSuccesded);
-  const navigate = useNavigate();
+  const orderDetails = useSelector(selectSuccesededOrderDetails);
   
   useEffect(() => {
     return () => {
+      dispatch(resetCartItemsState());
       navigate('/payment-succeeded');
     };
-  }, [isOrderSuccesded === true]);
+  }, [orderDetails != null]);
   
-  const paymentHandler = (e) => {
+  const paymentHandler = async (e) => {
     e.preventDefault();
     
     if(!stripe || !elements){
       return;
     }
-
+    
     const card = elements.getElement(CardElement);
     const formFields = {amount, card, currentUser ,stripe};
     dispatch(createOrderStart(formFields));
@@ -46,6 +50,7 @@ const PaymentForm = () => {
     <PaymentFormContainer>
       <FormContainer onSubmit={paymentHandler}>
         <h2>Credit Card Payment</h2>
+        <div></div>
         <CardElement />
         <PaymentButton isLoading={orderIsLoading} buttonType={BUTTON_TYPE_CLASSES.inverted}>Pay Now</PaymentButton>
       </FormContainer>

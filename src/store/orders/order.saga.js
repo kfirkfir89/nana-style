@@ -1,32 +1,28 @@
-import { all, call, takeLatest, put , } from "redux-saga/effects";
-
-import { useNavigate } from "react-router-dom";
+import { all, call, takeLatest, put , select } from "redux-saga/effects";
 
 import { ORDER_ACTION_TYPES } from "./order.types";
 import { orderSuccesded, orderFailed } from "./order.action"; 
 
+import * as cartSelectors from "../cart/cart.selector";
+
 import { stripePaymentIntent, stripePaymentResult } from "../../utils/stripe/stripe.utils";
 import { createNewOrderDocument } from "../../utils/firebase/firebase.utils";
-/* export function* signUp({payload: {email, password, displayName}}){
-  try {
-    const { user } = yield call(createAuthUserWithEmailAndPassword, email, password);
-    yield put(signUpSuccess( user, { displayName }));
 
-  } catch (error) {
-    yield put(signUpFailed(error));
-  }
-}; */
+function* getCartItemsSAGA() {
+  const cartItems = yield select(cartSelectors.selectCartItems);
+  return cartItems;
+}
 
-export function* paymentIntentCall({payload:{amount, card, currentUser ,stripe}}) {
-
+export function* paymentIntentCall({payload:{amount, card, currentUser , stripe}}) {
   try { 
+    const orderItems = yield(call(getCartItemsSAGA));
 
     if(currentUser === null){
       currentUser = {
         displayName: 'Guest'
       }
     };
-    
+
     const paymentIntentRespone = yield call(stripePaymentIntent, amount);
     const {paymentIntent: { client_secret }} = paymentIntentRespone;
 
@@ -49,14 +45,13 @@ export function* paymentIntentCall({payload:{amount, card, currentUser ,stripe}}
           orderId: paymentIntent.created,
           createAt: date,
           user: currentUser,
+          orderItems:orderItems,
           paymentIntent:paymentIntent,
         };
 
         yield call(createNewOrderDocument ,newOrderDetails);
-
-        const { orderId, createAt, user } = newOrderDetails;
         
-        yield put(orderSuccesded(orderId, createAt, user));
+        yield put(orderSuccesded(newOrderDetails));
       }
     } 
   } catch (error) {

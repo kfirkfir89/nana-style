@@ -33,6 +33,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "no-use-before-define": "off",
     "extends": [
       "react-app",
       "react-app/jest"

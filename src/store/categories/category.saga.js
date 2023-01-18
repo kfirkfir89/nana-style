@@ -9,7 +9,7 @@ import { CATEGORIES_ACTION_TYPES } from "./category.types";
 export function* featchCategoriesAsync() {
   try {
     const categoriesArray = yield call(getCategoriesAndDocuments, 'categories');
-    console.log({categoriesArray});
+    //console.log({categoriesArray});
     yield put(featchCategoriesSuccess(categoriesArray));
   }
   catch (error) {
