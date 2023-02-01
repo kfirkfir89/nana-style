@@ -1,9 +1,12 @@
 import { createSelector } from "reselect";
 
+import { CategoriesState } from "./category.reducer";
+import { CategoryMap } from "./category.types";
+
 //memoization/cache
 //any change in redux store will rerun all the useSelectors in the app
 //initial selector to get the data/slice that we need
-const selectCategoryReducer = (state) => state.categories;
+const selectCategoryReducer = (state) : CategoriesState => state.categories;
 
 
 export const selectCategories = createSelector(
@@ -15,12 +18,12 @@ export const selectCategories = createSelector(
   
   export const selectCategoriesMap = createSelector(
     [selectCategories],
-    (categories) => {
+    (categories): CategoryMap => {
     return categories.reduce((acc, category) => {
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
       return acc;
-    }, {});
+    }, {} as CategoryMap);
   }
 );
 
