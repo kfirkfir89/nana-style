@@ -1,8 +1,8 @@
 import { AnyAction } from 'redux';
 
-import { CATEGORIES_ACTION_TYPES, Category } from './category.types';
+import { Category } from './category.types';
 
-import { CategoryAction, featchCategoriesStart, FeatchCategoriesSuccess, featchCategoriesFailed, featchCategoriesSuccess } from './category.action';
+import { featchCategoriesStart, featchCategoriesSuccess, featchCategoriesFailed } from './category.action';
 
 //read only is an additional property you can add so that you force it, 
  //that this state object can never be modified.It can only be read.
@@ -21,7 +21,7 @@ export const CATEGORIES_INITIAL_STATE : CategoriesState = {
 
 export const categoriesReducer = (
     state = CATEGORIES_INITIAL_STATE,
-    action = {} as AnyAction
+    action: AnyAction
   ): CategoriesState => {
     if(featchCategoriesStart.match(action)){
       return { ...state, isLoading: true };

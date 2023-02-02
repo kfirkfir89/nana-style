@@ -8,13 +8,6 @@ export type FeatchCategoriesSuccess = ActionWithPayload<CATEGORIES_ACTION_TYPES.
 
 export type FeatchCategoriesFailed = ActionWithPayload<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, Error>;
 
-//union type
-export type CategoryAction = 
-  | FeatchCategoriesStart 
-  | FeatchCategoriesSuccess 
-  | FeatchCategoriesFailed;
-
-
 export const featchCategoriesStart = withMatcher(
   (): FeatchCategoriesStart => 
   createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START)
