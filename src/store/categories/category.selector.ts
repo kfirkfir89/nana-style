@@ -1,12 +1,15 @@
 import { createSelector } from "reselect";
 
+import { RootState } from "../store";
+
 import { CategoriesState } from "./category.reducer";
+
 import { CategoryMap } from "./category.types";
 
 //memoization/cache
 //any change in redux store will rerun all the useSelectors in the app
 //initial selector to get the data/slice that we need
-const selectCategoryReducer = (state) : CategoriesState => state.categories;
+const selectCategoryReducer = (state: RootState) : CategoriesState => state.categories;
 
 
 export const selectCategories = createSelector(
