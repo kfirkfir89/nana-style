@@ -1,12 +1,12 @@
 import { AnyAction } from 'redux';
 
-import { CartItem } from './cart.types';
+import { CartItemQuantity } from './cart.types';
 
 import { setIsCartOpen, setCartItems, resetCartItemsState } from './cart.action';
 
 export type CartState = {
   readonly isCartOpen: boolean;
-  readonly cartItems: CartItem[],
+  readonly cartItems: CartItemQuantity[],
 }
 
 const INITIAL_STATE: CartState = {

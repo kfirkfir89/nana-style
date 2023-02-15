@@ -22,6 +22,7 @@ import { getFirestore,
         } from 'firebase/firestore';
 
 import { Category } from "../../store/categories/category.types";    
+import { NewOrderDetails } from "../../store/orders/order.types";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -109,7 +110,7 @@ export type UserData = {
   createdAt: Date;
   displayName: string;
   email: string;
-}
+};
 
 export type AddittionalInformation = {
   displayName?: string; 
@@ -182,11 +183,12 @@ export const getCurrentUser = (): Promise<User | null> => {
 
 
 //NEED TO TYPE THIS ORDER CREATING
-export const createNewOrderDocument = async (newOrderDetails: any, addittionalInformation: any = {}) => {
+export const createNewOrderDocument = async (newOrderDetails: NewOrderDetails) => {
 
   if(!newOrderDetails) return;
 
   await setDoc(doc(db, 'orders', newOrderDetails.orderId.toString()), newOrderDetails);
+  //await setDoc(doc(db, 'orders'), newOrderDetails);
   console.log('done');
 /* 
   const docRef = doc(db, 'orders', newOrderDetails.orderId.toString());

@@ -22,8 +22,7 @@ import { getCurrentUser,
   signInAuthUserWithEmailAndPassword,
   createAuthUserWithEmailAndPassword,
   signOutUser,
-  AddittionalInformation,
-  UserData
+  AddittionalInformation
 } from '../../utils/firebase/firebase.utils';
 
 
@@ -53,7 +52,6 @@ export function* signInWithGoogle(){
 export function* signInWithEmail({ payload:{ email, password }}: EmailSignInStart){
   try {
     const userCredential = yield*(call(signInAuthUserWithEmailAndPassword, email, password));
-
     if(userCredential){
       const { user } = userCredential;
       yield* call(getSnapshotFromUserAuth, user);

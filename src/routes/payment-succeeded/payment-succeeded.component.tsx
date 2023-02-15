@@ -4,8 +4,9 @@ import { selectOrderDetails } from "../../store/orders/order.selector";
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 export const PaymentSucceeded = () => {
-  
   const orderDetails = useSelector(selectOrderDetails);
+  if(orderDetails === null || orderDetails.user === null) return;
+
   const { createAt, orderId, user, orderItems } = orderDetails;
 
   return(

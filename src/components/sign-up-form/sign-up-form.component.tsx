@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 import { signUpStart } from '../../store/user/user.action';
 
@@ -23,7 +24,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   }
   
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     
     event.preventDefault();
 
@@ -37,14 +38,14 @@ const SignUpForm = () => {
       resetFormFields();
 
     } catch (error) {
-      if(error.code === 'auth/email-already-in-use'){
+      if((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS){
         alert('Cannot Create user, email already in use');
       }
     }
 
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({...formFields, [name]: value })
 
@@ -54,7 +55,7 @@ const SignUpForm = () => {
     <div className='sign-up-container fontFamily px-5'>
       <h2>Don't have an account?</h2>
       <span className='pl-1'>Sign up with your email and password</span>
-      <form className="grid grid-col-4 mt-2" onSubmit={handleSubmit}>
+      <form className="grid grid-col-4 mt-2" onSubmit={(e) => handleSubmit}>
         
         <FormInput 
           label="Display Name"
@@ -94,7 +95,7 @@ const SignUpForm = () => {
 
         <div className='grid grid-cols-4'>
           <div className='flex flex-col col-start-2 col-span-2 gap-3'>
-            <Button buttonType='default' type="submit">Sign Up</Button>
+            <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.default}>Sign Up</Button>
           </div>
         </div>
 

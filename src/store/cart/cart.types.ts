@@ -8,6 +8,6 @@ export enum CART_ACTION_TYPES {
   RESET_CART = 'cart/RESET_CART',
 };
 
-export type CartItem = CategoryItem & {
+export type CartItemQuantity = CategoryItem & {
   quantity: number;
 }

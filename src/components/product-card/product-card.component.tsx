@@ -5,6 +5,8 @@ import { selectCartItems } from '../../store/cart/cart.selector';
 
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
+import { CategoryItem } from '../../store/categories/category.types';
+
 import {
   ProductCartContainer,
   Footer,
@@ -12,7 +14,8 @@ import {
   Price,
 } from './product-card.styles';
 
-const ProductCard = ({ product }) => {
+
+const ProductCard = ({ product } : { product: CategoryItem }) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);

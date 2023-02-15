@@ -1,9 +1,11 @@
 import { createSelector } from "reselect";
 
+import { RootState } from "../store";
+
 //memoization/cache
 //any change in redux store will rerun all the useSelectors in the app
 //initial selector to get the data/slice that we need
-const selectOrderReducer = (state) => state.order;
+const selectOrderReducer = (state: RootState) => state.order;
 
 export const selectIsLoadingOrder = createSelector(
     //input

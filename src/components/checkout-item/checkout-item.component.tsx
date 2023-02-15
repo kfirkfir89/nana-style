@@ -13,8 +13,10 @@ import {
   RemoveButton,
 } from './checkout-item.styles';
 
+import { CartItemQuantity } from '../../store/cart/cart.types';
 
-const CheckoutItem = ({cartItem}) => {
+
+const CheckoutItem = ({cartItem} : {cartItem: CartItemQuantity}) => {
   const { name, imageUrl, price, quantity} = cartItem;
 
   const dispatch = useDispatch();
