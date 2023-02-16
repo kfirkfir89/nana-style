@@ -1,5 +1,4 @@
-import { loadStripe, PaymentIntentResult } from "@stripe/stripe-js";
-import { Stripe, StripeCardElement } from "@stripe/stripe-js";
+import { loadStripe, PaymentIntentResult,Stripe, StripeCardElement } from "@stripe/stripe-js";
 import { UserData } from "../firebase/firebase.utils";
 
 // fix the any type
@@ -13,10 +12,15 @@ export type StripeFormFieldAmount = StripeFormFields &{
   amount: number;
 }
 
+export type StripeFormFieldCSecret = StripeFormFields &{
+  client_secret:string;
+}
+
 export const stripePromise = loadStripe(
   process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY as string
   );
-  
+
+
 export const stripePaymentIntent = (amount: number): Promise<PaymentIntentResult> => {
   return new Promise((resolve) => {
     fetch('/.netlify/functions/create-payment-intent', {
@@ -26,12 +30,12 @@ export const stripePaymentIntent = (amount: number): Promise<PaymentIntentResult
       },
       body: JSON.stringify({ amount: amount * 100 }),
     }).then((res) => {
-      return resolve(res.json());
+       resolve(res.json());
     })
   }) as Promise<PaymentIntentResult>;
 };
 
-export const stripePaymentResult = (card:StripeCardElement, currentUser:UserData | null ,stripe:Stripe ,client_secret: string ): Promise<PaymentIntentResult>=> {
+export const stripePaymentConfirm = (card:StripeCardElement, currentUser:UserData | null ,stripe:Stripe ,client_secret: string ): Promise<PaymentIntentResult>=> {
   return new Promise((resolve) => {
     stripe.confirmCardPayment(client_secret, {
       payment_method: {
@@ -41,7 +45,7 @@ export const stripePaymentResult = (card:StripeCardElement, currentUser:UserData
         }
       }
     }).then((res) => {
-      resolve(res);
+       resolve(res);
     })
   }) as Promise<PaymentIntentResult>;
 };

@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { FormEvent, useMemo } from "react";
+import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 
@@ -8,14 +10,8 @@ import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectIsLoadingOrder, selectOrderDetails } from "../../store/orders/order.selector";
 
 import { createOrderStart } from "../../store/orders/order.action";
-import { resetCartItemsState } from "../../store/cart/cart.action";
-
-import { useEffect, FormEvent } from "react";
 
 import { PaymentFormContainer, FormContainer, PaymentButton } from "./payment-form.styles";
-
-import { StripeFormFields } from "../../utils/stripe/stripe.utils";
-
 import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 
@@ -26,18 +22,18 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
   const orderIsLoading = useSelector(selectIsLoadingOrder);
   const orderDetails = useSelector(selectOrderDetails);
-  
-  useEffect(() => {
-    return () => {
-      dispatch(resetCartItemsState());
-      navigate('/payment-succeeded');
-    };
-  }, [orderDetails !== null]);
+
+  const shouldRedirect = useMemo(() => {
+    if(orderDetails !== null) {
+      return true;
+    }else{
+      return false;
+    }
+  },[orderDetails])
   
   const paymentHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,6 +55,7 @@ const PaymentForm = () => {
         <h2>Credit Card Payment</h2>
         <CardElement />
         <PaymentButton isLoading={orderIsLoading} buttonType={BUTTON_TYPE_CLASSES.inverted}>Pay Now</PaymentButton>
+        { shouldRedirect && <Navigate to="/payment-succeeded"/> } 
       </FormContainer>
     </PaymentFormContainer>
   )

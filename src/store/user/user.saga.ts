@@ -58,6 +58,7 @@ export function* signInWithEmail({ payload:{ email, password }}: EmailSignInStar
     }
 
   } catch (error) {
+    console.log("ERRORRRRRRRRRRRRRRRRRR",error);
     yield* put(signInFailed(error as Error));
   }
 };
