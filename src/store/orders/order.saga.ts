@@ -34,6 +34,7 @@ export function* confirmStripePayment({card, currentUser ,stripe , client_secret
           orderItems: orderItems,
           paymentIntent: paymentIntent,
     };  
+    
     yield* call(createNewOrderDocument ,newOrderDetails);
     yield* put(orderSuccesded(newOrderDetails));
 
